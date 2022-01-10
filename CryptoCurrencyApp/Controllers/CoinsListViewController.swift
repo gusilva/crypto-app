@@ -17,8 +17,9 @@ private extension CoinsListViewController {
     view.addSubview(tableView)
     
     tableView.frame = view.bounds
+    tableView.rowHeight = 48
     tableView.dataSource = self
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+    tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseID)
   }
   
   func getCoins() {
@@ -33,7 +34,8 @@ private extension CoinsListViewController {
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
-      case .failure(_):
+      case .failure(let error):
+        print(error)
         break
       }
     }
@@ -47,8 +49,9 @@ extension CoinsListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let coin = coins[indexPath.row]
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-    cell.textLabel?.text = coin.name
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.reuseID, for: indexPath) as! CoinTableViewCell
+    cell.coin = coin
     
     return cell
   }

@@ -5,7 +5,7 @@ struct Coin: Decodable {
   let name: String
   let symbol: String
   let rank: Int
-  let is_new: Bool
-  let is_active: Bool
+  let isNew: Bool
+  let isActive: Bool
   let type: String
 }

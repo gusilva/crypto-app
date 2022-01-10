@@ -32,7 +32,10 @@ class CoinService {
       }
       
       do {
-        let decodedData = try JSONDecoder().decode([Coin].self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let decodedData = try decoder.decode([Coin].self, from: data)
         
         completion(.success(decodedData))
       } catch {
