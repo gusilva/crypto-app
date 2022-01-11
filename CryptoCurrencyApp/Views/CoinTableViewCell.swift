@@ -9,7 +9,7 @@ class CoinTableViewCell: UITableViewCell {
         return
       }
 
-      coinLabel.text = coin.name
+      coinLabel.text = "\(coin.rank). \(coin.name) (\(coin.symbol))"
       coinStatusLabel.text = coin.isActive ? "active" : "not active"
       coinStatusLabel.textColor = coin.isActive ? .systemGreen : .systemRed
     }
@@ -35,11 +35,16 @@ private extension CoinTableViewCell {
     rowStack.translatesAutoresizingMaskIntoConstraints = false
     rowStack.axis = .horizontal
     rowStack.alignment = .fill
+    rowStack.distribution = .fillProportionally
     rowStack.spacing = 10
     
     coinLabel.translatesAutoresizingMaskIntoConstraints = false
     coinLabel.numberOfLines = 1
+    coinLabel.lineBreakMode = .byTruncatingTail
+    
+    
     coinStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+    coinStatusLabel.textAlignment = .center
   }
   
   func layout() {
@@ -48,9 +53,12 @@ private extension CoinTableViewCell {
     rowStack.addArrangedSubview(coinStatusLabel)
     
     NSLayoutConstraint.activate([
-      rowStack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      rowStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      rowStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      rowStack.topAnchor.constraint(equalTo: self.topAnchor),
+      rowStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+      rowStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+      rowStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      
+      coinStatusLabel.widthAnchor.constraint(equalToConstant: 80)
     ])
   }
 }

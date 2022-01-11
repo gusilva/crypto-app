@@ -6,7 +6,7 @@ class CoinsListViewController: UIViewController {
   
   override func loadView() {
     super.loadView()
-    
+
     configureTableView()
     getCoins()
   }
@@ -20,6 +20,7 @@ private extension CoinsListViewController {
     tableView.rowHeight = 48
     tableView.dataSource = self
     tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseID)
+    tableView.clipsToBounds = true
   }
   
   func getCoins() {
