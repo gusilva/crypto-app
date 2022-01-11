@@ -10,17 +10,35 @@ class CoinsListViewController: UIViewController {
     configureTableView()
     getCoins()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+      self.navigationController?.setNavigationBarHidden(true, animated: animated)
+      super.viewWillAppear(animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+      self.navigationController?.setNavigationBarHidden(false, animated: animated)
+      super.viewWillDisappear(animated)
+  }
 }
 
 private extension CoinsListViewController {
   func configureTableView() {
     view.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
     
-    tableView.frame = view.bounds
     tableView.rowHeight = 48
     tableView.dataSource = self
     tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseID)
     tableView.clipsToBounds = true
+    
+    NSLayoutConstraint.activate([
+      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+      
+    ])
   }
   
   func getCoins() {
