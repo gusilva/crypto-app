@@ -6,19 +6,24 @@ class CoinsListViewController: UIViewController {
   
   override func loadView() {
     super.loadView()
-
+    
     configureTableView()
     getCoins()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-      self.navigationController?.setNavigationBarHidden(true, animated: animated)
-      super.viewWillAppear(animated)
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    
+    if let indexPath = tableView.indexPathForSelectedRow {
+      tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    super.viewWillAppear(animated)
   }
-
+  
   override func viewWillDisappear(_ animated: Bool) {
-      self.navigationController?.setNavigationBarHidden(false, animated: animated)
-      super.viewWillDisappear(animated)
+    self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    super.viewWillDisappear(animated)
   }
 }
 
@@ -29,6 +34,7 @@ private extension CoinsListViewController {
     
     tableView.rowHeight = 48
     tableView.dataSource = self
+    tableView.delegate = self
     tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseID)
     tableView.separatorStyle = .none
     
@@ -61,7 +67,7 @@ private extension CoinsListViewController {
   }
 }
 
-extension CoinsListViewController: UITableViewDataSource {
+extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return coins.count
   }
@@ -73,5 +79,14 @@ extension CoinsListViewController: UITableViewDataSource {
     cell.coin = coin
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let coin = coins[indexPath.row]
+    
+    let coinDetailViewController = CoinDetailViewController(coinName: coin.name, isActive: coin.isActive)
+    
+    //    navigationController?.pushViewController(coinDetailViewController, animated: true)
+    navigationController?.show(coinDetailViewController, sender: self)
   }
 }
