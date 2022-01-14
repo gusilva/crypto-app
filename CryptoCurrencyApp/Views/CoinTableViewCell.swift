@@ -9,7 +9,7 @@ class CoinTableViewCell: UITableViewCell {
         return
       }
 
-      coinLabel.text = "\(coin.rank). \(coin.name) (\(coin.symbol))"
+      coinLabel.text = coin.label
       coinStatusLabel.text = coin.isActive ? "active" : "not active"
       coinStatusLabel.textColor = coin.isActive ? .systemGreen : .systemRed
     }

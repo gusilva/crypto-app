@@ -37,17 +37,5 @@ class CoinDetailViewController: UIViewController {
         rightLabel.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -16),
       ])
     }
-    
-//    self.navigationItem.backBarButtonItem?.title = ""
-//    self.navigationController?.navigationItem.backButtonTitle = ""
-//    self.navigationController?.navigationBar.topItem?.title = ""
-    
-//    self.navigationController?.navigationItem.backBarButtonItem = UIBarButtonItem(
-//      title: "here",
-//      style: .plain,
-//      target: nil,
-//      action: nil
-//    )
   }
-  
 }

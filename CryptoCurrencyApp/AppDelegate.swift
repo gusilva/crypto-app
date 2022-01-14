@@ -13,7 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navigationController = UINavigationController(rootViewController: CoinsListViewController())
     window?.rootViewController = navigationController
     
+    configureNavigationBar()
+    
     return true
+  }
+  
+  func configureNavigationBar() {
+    UINavigationBar.appearance().tintColor = .label
   }
 
 

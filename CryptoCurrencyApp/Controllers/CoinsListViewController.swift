@@ -56,6 +56,7 @@ private extension CoinsListViewController {
       switch result {
       case .success(let coins):
         self.coins = coins
+        
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
@@ -84,9 +85,8 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let coin = coins[indexPath.row]
     
-    let coinDetailViewController = CoinDetailViewController(coinName: coin.name, isActive: coin.isActive)
+    let coinDetailViewController = CoinDetailViewController(coinName: coin.label, isActive: coin.isActive)
     
-    //    navigationController?.pushViewController(coinDetailViewController, animated: true)
     navigationController?.show(coinDetailViewController, sender: self)
   }
 }
