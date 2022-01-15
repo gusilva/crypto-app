@@ -1,6 +1,6 @@
 import UIKit
 
-class CoinDetailViewController: UIViewController {
+class CoinDetailViewController: DataLoadingViewController {
   
   let titleLabel = UILabel()
   let rightLabel = UILabel()
@@ -24,13 +24,7 @@ class CoinDetailViewController: UIViewController {
     if let navigationBar = self.navigationController?.navigationBar {
       rightLabel.translatesAutoresizingMaskIntoConstraints = false
       navigationBar.addSubview(rightLabel)
-      navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-        title: titleLabel.text,
-        style: .plain,
-        target: nil,
-        action: nil
-      )
-
+      navigationBar.topItem?.backButtonTitle = titleLabel.text
 
       NSLayoutConstraint.activate([
         rightLabel.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),

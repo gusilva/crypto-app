@@ -1,6 +1,6 @@
 import UIKit
 
-class CoinsListViewController: UIViewController {
+class CoinsListViewController: DataLoadingViewController {
   var coins: [Coin] = []
   let tableView = UITableView()
   
@@ -48,6 +48,7 @@ private extension CoinsListViewController {
   }
   
   func getCoins() {
+    showLoading()
     CoinService.shared.fetchCoins { [weak self] result in
       guard let self = self else {
         return
@@ -59,6 +60,7 @@ private extension CoinsListViewController {
         
         DispatchQueue.main.async {
           self.tableView.reloadData()
+          self.dismissLoadingView()
         }
       case .failure(let error):
         print(error)
