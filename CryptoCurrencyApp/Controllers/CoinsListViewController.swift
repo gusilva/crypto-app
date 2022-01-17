@@ -87,7 +87,7 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let coin = coins[indexPath.row]
     
-    let coinDetailViewController = CoinDetailViewController(coinName: coin.label, isActive: coin.isActive)
+    let coinDetailViewController = CoinDetailViewController(coinName: coin.label, coinId: coin.id)
     
     navigationController?.show(coinDetailViewController, sender: self)
   }
