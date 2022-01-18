@@ -1,6 +1,6 @@
 import UIKit
 
-class CoinDetailViewController: DataLoadingViewController {
+class CoinDetailViewController: UIViewController {
   
   var coinDetail: CoinDetail? {
     didSet {
@@ -11,12 +11,14 @@ class CoinDetailViewController: DataLoadingViewController {
       DispatchQueue.main.async {
         self.rightLabel.text = coinDetail.isActive ? "active" : "not active"
         self.rightLabel.textColor = coinDetail.isActive ? .systemGreen : .systemRed
+        self.coinDescriptionLabel.text = coinDetail.description
       }
     }
   }
   let titleLabel = UILabel()
   let rightLabel = UILabel()
-  let headerStackView = UIStackView()
+  let coinDescriptionLabel = UILabel()
+  let contentStackView = UIStackView()
   
   init(coinName: String, coinId: String) {
     super.init(nibName: nil, bundle: nil)
@@ -37,16 +39,9 @@ class CoinDetailViewController: DataLoadingViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     
-    if let navigationBar = self.navigationController?.navigationBar {
-      rightLabel.translatesAutoresizingMaskIntoConstraints = false
-      navigationBar.addSubview(rightLabel)
-      navigationBar.topItem?.backButtonTitle = titleLabel.text
-
-      NSLayoutConstraint.activate([
-        rightLabel.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),
-        rightLabel.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -16),
-      ])
-    }
+    styles()
+    layout()
+    setupNavigationBar()
   }
   
   
@@ -64,5 +59,43 @@ class CoinDetailViewController: DataLoadingViewController {
         break
       }
     }
+  }
+}
+
+private extension CoinDetailViewController {
+  func setupNavigationBar() {
+    if let navigationBar = self.navigationController?.navigationBar {
+      rightLabel.translatesAutoresizingMaskIntoConstraints = false
+      navigationBar.addSubview(rightLabel)
+      navigationBar.topItem?.backButtonTitle = titleLabel.text
+
+      NSLayoutConstraint.activate([
+        rightLabel.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),
+        rightLabel.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -16),
+      ])
+    }
+  }
+  
+  func styles() {
+    contentStackView.translatesAutoresizingMaskIntoConstraints = false
+    contentStackView.axis = .vertical
+    contentStackView.alignment = .top
+    contentStackView.distribution = .equalSpacing
+    contentStackView.spacing = 10
+    
+    coinDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+    coinDescriptionLabel.numberOfLines = 0
+    coinDescriptionLabel.lineBreakMode = .byWordWrapping
+  }
+  
+  func layout() {
+    view.addSubview(contentStackView)
+    contentStackView.addArrangedSubview(coinDescriptionLabel)
+    
+    NSLayoutConstraint.activate([
+      contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+      contentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+      contentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+    ])
   }
 }
