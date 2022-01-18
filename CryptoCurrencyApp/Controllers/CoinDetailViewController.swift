@@ -19,6 +19,7 @@ class CoinDetailViewController: UIViewController {
   let rightLabel = UILabel()
   let coinDescriptionLabel = UILabel()
   let contentStackView = UIStackView()
+  let scrollView = UIScrollView()
   
   init(coinName: String, coinId: String) {
     super.init(nibName: nil, bundle: nil)
@@ -77,25 +78,37 @@ private extension CoinDetailViewController {
   }
   
   func styles() {
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    
     contentStackView.translatesAutoresizingMaskIntoConstraints = false
     contentStackView.axis = .vertical
     contentStackView.alignment = .top
     contentStackView.distribution = .equalSpacing
     contentStackView.spacing = 10
+    contentStackView.isLayoutMarginsRelativeArrangement = true
+    contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+
     
     coinDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     coinDescriptionLabel.numberOfLines = 0
+    coinDescriptionLabel.textAlignment = .justified
     coinDescriptionLabel.lineBreakMode = .byWordWrapping
   }
   
   func layout() {
-    view.addSubview(contentStackView)
+    view.addSubview(scrollView)
+    scrollView.addSubview(contentStackView)
     contentStackView.addArrangedSubview(coinDescriptionLabel)
     
     NSLayoutConstraint.activate([
-      contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-      contentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      contentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      
+      contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+      contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+      contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
     ])
   }
 }
