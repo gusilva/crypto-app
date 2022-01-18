@@ -1,6 +1,9 @@
 import Foundation
 
 struct CoinDetail: Decodable {
+  var status: String {
+    isActive ? "active" : "not active"
+  }
   let id: String
   let name: String
   let description: String

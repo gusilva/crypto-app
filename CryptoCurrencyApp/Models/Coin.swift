@@ -4,6 +4,9 @@ struct Coin: Decodable {
   var label: String {
     "\(rank). \(name) (\(symbol))"
   }
+  var status: String {
+    isActive ? "active" : "not active"
+  }
   
   let id: String
   let name: String

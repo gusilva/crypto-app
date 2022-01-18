@@ -9,7 +9,7 @@ class CoinDetailViewController: UIViewController {
       }
 
       DispatchQueue.main.async {
-        self.rightLabel.text = coinDetail.isActive ? "active" : "not active"
+        self.rightLabel.text = coinDetail.status
         self.rightLabel.textColor = coinDetail.isActive ? .systemGreen : .systemRed
         self.coinDescriptionLabel.text = coinDetail.description
       }
@@ -86,7 +86,7 @@ private extension CoinDetailViewController {
     contentStackView.distribution = .equalSpacing
     contentStackView.spacing = 10
     contentStackView.isLayoutMarginsRelativeArrangement = true
-    contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+    contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 0, trailing: 20)
 
     
     coinDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false

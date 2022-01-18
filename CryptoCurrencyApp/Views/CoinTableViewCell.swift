@@ -10,7 +10,7 @@ class CoinTableViewCell: UITableViewCell {
       }
 
       coinLabel.text = coin.label
-      coinStatusLabel.text = coin.isActive ? "active" : "not active"
+      coinStatusLabel.text = coin.status
       coinStatusLabel.textColor = coin.isActive ? .systemGreen : .systemRed
     }
   }
