@@ -3,11 +3,19 @@ import UIKit
 class CoinsListViewController: DataLoadingViewController {
   
   var coins: [Coin] = []
+  var filteredCoins: [Coin] = [] {
+    didSet {
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+  }
   let tableView = UITableView()
   
   override func loadView() {
     super.loadView()
-
+    title = "Coins"
+    
     configureTableView()
     configureSearchController()
     getCoins()
@@ -51,7 +59,7 @@ private extension CoinsListViewController {
     searchController.definesPresentationContext = true
     
     navigationItem.hidesSearchBarWhenScrolling = false
-    navigationItem.titleView = searchController.searchBar
+    navigationItem.searchController = searchController
   }
   
   func getCoins() {
@@ -64,9 +72,9 @@ private extension CoinsListViewController {
       switch result {
       case .success(let coins):
         self.coins = coins
+        self.filteredCoins = coins
         
         DispatchQueue.main.async {
-          self.tableView.reloadData()
           self.dismissLoadingView()
         }
       case .failure(let error):
@@ -79,11 +87,11 @@ private extension CoinsListViewController {
 
 extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return coins.count
+    return filteredCoins.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let coin = coins[indexPath.row]
+    let coin = filteredCoins[indexPath.row]
     
     let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.reuseID, for: indexPath) as! CoinTableViewCell
     cell.coin = coin
@@ -92,7 +100,7 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let coin = coins[indexPath.row]
+    let coin = filteredCoins[indexPath.row]
     
     let coinDetailViewController = CoinDetailViewController(coinName: coin.label, coinId: coin.id)
     
@@ -102,6 +110,11 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension CoinsListViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
+    guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+      filteredCoins = coins
+      return
+    }
     
+    filteredCoins = coins.filter({ $0.label.lowercased().contains(filter.lowercased()) })
   }
 }

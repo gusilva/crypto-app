@@ -66,6 +66,7 @@ private extension CoinDetailViewController {
   func setupNavigationBar() {
     if let navigationBar = self.navigationController?.navigationBar {
       rightLabel.translatesAutoresizingMaskIntoConstraints = false
+
       navigationBar.addSubview(rightLabel)
       navigationBar.topItem?.backButtonTitle = titleLabel.text
 
