@@ -44,7 +44,7 @@ private extension CoinTableViewCell {
     
     
     coinStatusLabel.translatesAutoresizingMaskIntoConstraints = false
-    coinStatusLabel.textAlignment = .center
+    coinStatusLabel.textAlignment = .right
   }
   
   func layout() {

@@ -1,29 +1,24 @@
 import UIKit
 
 class CoinsListViewController: DataLoadingViewController {
+  
   var coins: [Coin] = []
   let tableView = UITableView()
   
   override func loadView() {
     super.loadView()
-    
+
     configureTableView()
+    configureSearchController()
     getCoins()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    
     if let indexPath = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: indexPath, animated: true)
     }
     
     super.viewWillAppear(animated)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    super.viewWillDisappear(animated)
   }
 }
 
@@ -45,6 +40,18 @@ private extension CoinsListViewController {
       tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
       
     ])
+  }
+  
+  func configureSearchController() {
+    let searchController = UISearchController()
+    searchController.searchResultsUpdater = self
+    searchController.searchBar.placeholder = "Search for coin"
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.definesPresentationContext = true
+    
+    navigationItem.hidesSearchBarWhenScrolling = false
+    navigationItem.titleView = searchController.searchBar
   }
   
   func getCoins() {
@@ -90,5 +97,11 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
     let coinDetailViewController = CoinDetailViewController(coinName: coin.label, coinId: coin.id)
     
     navigationController?.show(coinDetailViewController, sender: self)
+  }
+}
+
+extension CoinsListViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    
   }
 }

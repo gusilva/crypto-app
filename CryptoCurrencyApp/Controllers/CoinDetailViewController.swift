@@ -31,10 +31,6 @@ class CoinDetailViewController: UIViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    rightLabel.text = ""
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +41,9 @@ class CoinDetailViewController: UIViewController {
     setupNavigationBar()
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    rightLabel.text = ""
+  }
   
   private func getCoinDetail(coinId: String) {
     CoinService.shared.fetchCoinDetail(coinId: coinId) { [weak self] result in
