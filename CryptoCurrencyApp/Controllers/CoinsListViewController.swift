@@ -2,7 +2,7 @@ import UIKit
 
 class CoinsListViewController: DataLoadingViewController {
   
-  var coins: [Coin] = []
+  var allCoins: [Coin] = []
   var filteredCoins: [Coin] = [] {
     didSet {
       DispatchQueue.main.async {
@@ -71,7 +71,7 @@ private extension CoinsListViewController {
       
       switch result {
       case .success(let coins):
-        self.coins = coins
+        self.allCoins = coins
         self.filteredCoins = coins
         
         DispatchQueue.main.async {
@@ -111,10 +111,10 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
 extension CoinsListViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     guard let filter = searchController.searchBar.text, !filter.isEmpty else {
-      filteredCoins = coins
+      filteredCoins = allCoins
       return
     }
     
-    filteredCoins = coins.filter({ $0.label.lowercased().contains(filter.lowercased()) })
+    filteredCoins = allCoins.filter({ $0.label.lowercased().contains(filter.lowercased()) })
   }
 }
