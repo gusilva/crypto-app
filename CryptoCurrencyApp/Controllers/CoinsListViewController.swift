@@ -103,6 +103,7 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
     let coin = filteredCoins[indexPath.row]
     
     let coinDetailViewController = CoinDetailViewController(coinName: coin.label, coinId: coin.id)
+    coinDetailViewController.modalPresentationStyle = .overFullScreen
     
     navigationController?.show(coinDetailViewController, sender: self)
   }

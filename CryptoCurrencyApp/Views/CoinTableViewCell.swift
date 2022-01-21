@@ -1,6 +1,6 @@
 import UIKit
 
-class CoinTableViewCell: UITableViewCell {
+final class CoinTableViewCell: UITableViewCell {
   static let reuseID = "CoinTableViewCell"
   
   var coin: Coin? {
