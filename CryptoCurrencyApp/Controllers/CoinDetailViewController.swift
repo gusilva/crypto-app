@@ -11,6 +11,15 @@ class CoinDetailViewController: UIViewController {
       DispatchQueue.main.async {
         self.rightLabel.text = coinDetail.status
         self.rightLabel.textColor = coinDetail.isActive ? .systemGreen : .systemRed
+        
+        guard let description = coinDetail.description, !description.isEmpty else {
+          let emptyStateView = EmptyStateView(message: "No information about this coin.")
+          emptyStateView.frame = self.view.bounds
+          
+          self.view.addSubview(emptyStateView)
+          
+          return
+        }
         self.coinDescriptionLabel.text = coinDetail.description
       }
     }
