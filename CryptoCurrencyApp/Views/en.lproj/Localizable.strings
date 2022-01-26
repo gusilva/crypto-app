@@ -1,0 +1,11 @@
+/* General purpose */
+"SEARCH_PLACEHOLDER" = "Search for coin";
+"EMPTY_STATE_COIN_DETAIL" = "No information about this coin";
+
+/* Titles */
+"COINS_LIST_TITLE" = "Coins";
+"TEAM_MEMBERS_TITLE" = "Team members";
+
+/* Errors/Warnings */
+"ERROR_PARSING_DATA" = "Failed to parse the response data.";
+"ERROR_INIT_URL" = "Failed to init url.";

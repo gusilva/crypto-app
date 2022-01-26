@@ -13,7 +13,7 @@ class CoinService {
   
   func fetchCoinDetail(coinId: String, completion: @escaping (Result<CoinDetail, CoinServiceError>) -> Void) {
     guard let url = URL(string: "\(baseUrl)/\(coinId)") else {
-      completion(.failure(.general(reason: "Failed to unit url")))
+      completion(.failure(.general(reason: NSLocalizedString("ERROR_INIT_URL", comment: "error init url"))))
       return
     }
     
@@ -27,7 +27,7 @@ class CoinService {
       }
       
       guard let data = data else {
-        completion(.failure(.general(reason: "Failed to parse the response data.")))
+        completion(.failure(.general(reason: NSLocalizedString("ERROR_PARSING_DATA", comment: "parsing error"))))
         return
       }
       
@@ -48,7 +48,7 @@ class CoinService {
   
   func fetchCoins(completion: @escaping (Result<[Coin], CoinServiceError>) -> Void) {
     guard let url = URL(string: baseUrl) else {
-      completion(.failure(.general(reason: "Failed to init url.")))
+      completion(.failure(.general(reason: NSLocalizedString("ERROR_INIT_URL", comment: "error init url"))))
       return
     }
     
@@ -62,7 +62,7 @@ class CoinService {
       }
       
       guard let data = data else {
-        completion(.failure(.general(reason: "Failed to parse the response data.")))
+        completion(.failure(.general(reason: NSLocalizedString("ERROR_PARSING_DATA", comment: "parsing error"))))
         return
       }
       

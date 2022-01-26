@@ -13,7 +13,7 @@ class CoinDetailViewController: UIViewController {
         self.rightLabel.textColor = coinDetail.isActive ? .systemGreen : .systemRed
         
         guard let description = coinDetail.description, !description.isEmpty else {
-          let emptyStateView = EmptyStateView(message: "No information about this coin.")
+          let emptyStateView = EmptyStateView(message: NSLocalizedString("EMPTY_STATE_COIN_DETAIL", comment: "empty state"))
           emptyStateView.frame = self.view.bounds
           
           self.view.addSubview(emptyStateView)
@@ -145,7 +145,6 @@ private extension CoinDetailViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.reuseIdentifier)
-//        tableView.separatorStyle = .none
     tableView.bounces = false
     tableView.allowsSelection = false
     
@@ -174,7 +173,7 @@ extension CoinDetailViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.reuseIdentifier) as! SectionHeaderView
-    header.titleLabel.text = "Team members"
+    header.titleLabel.text = NSLocalizedString("TEAM_MEMBERS_TITLE", comment: "team members")
     
     return header
   }

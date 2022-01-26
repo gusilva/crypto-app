@@ -33,10 +33,7 @@ private extension TeamMemberTableViewCell {
   func styles() {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
-//    stackView.alignment = .center
     stackView.distribution = .fill
-//    stackView.spacing = 10
-//    stackView.backgroundColor = .red
   }
   
   func layout() {

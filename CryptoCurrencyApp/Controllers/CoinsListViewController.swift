@@ -53,7 +53,7 @@ private extension CoinsListViewController {
   func configureSearchController() {
     let searchController = UISearchController()
     searchController.searchResultsUpdater = self
-    searchController.searchBar.placeholder = "Search for coin"
+    searchController.searchBar.placeholder = NSLocalizedString("SEARCH_PLACEHOLDER", comment: "search placeholder")
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.hidesNavigationBarDuringPresentation = false
     searchController.definesPresentationContext = true
