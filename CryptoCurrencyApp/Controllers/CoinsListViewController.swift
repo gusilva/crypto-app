@@ -38,7 +38,7 @@ private extension CoinsListViewController {
     tableView.rowHeight = 48
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseID)
+    tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseIdentifier)
     tableView.separatorStyle = .none
     
     NSLayoutConstraint.activate([
@@ -93,7 +93,7 @@ extension CoinsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let coin = filteredCoins[indexPath.row]
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.reuseID, for: indexPath) as! CoinTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.reuseIdentifier, for: indexPath) as! CoinTableViewCell
     cell.coin = coin
     
     return cell

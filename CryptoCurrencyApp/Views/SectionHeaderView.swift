@@ -30,8 +30,6 @@ private extension SectionHeaderView {
     NSLayoutConstraint.activate([
       titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
       titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-      titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
     ])
   }
   

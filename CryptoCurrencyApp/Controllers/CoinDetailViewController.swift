@@ -135,8 +135,8 @@ private extension CoinDetailViewController {
   func configureTableView() {
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
-        tableView.separatorStyle = .none
+    tableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.reuseIdentifier)
+//        tableView.separatorStyle = .none
     tableView.bounces = false
     tableView.allowsSelection = false
     
@@ -157,15 +157,15 @@ extension CoinDetailViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let teamMember = teamMembers[indexPath.row]
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-    cell.textLabel?.text = teamMember.name
+    let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberTableViewCell.reuseIdentifier, for: indexPath) as! TeamMemberTableViewCell
+    cell.teamMember = teamMember
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.reuseIdentifier) as! SectionHeaderView
-    header.titleLabel.text = "Team Members"
+    header.titleLabel.text = "Team members"
     
     return header
   }

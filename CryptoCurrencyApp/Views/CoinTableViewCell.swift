@@ -1,7 +1,7 @@
 import UIKit
 
 final class CoinTableViewCell: UITableViewCell {
-  static let reuseID = "CoinTableViewCell"
+  static let reuseIdentifier: String = String(describing: self)
   
   var coin: Coin? {
     didSet {
